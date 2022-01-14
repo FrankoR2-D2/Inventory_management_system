@@ -1,0 +1,352 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ButtonBar?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1280.0" style="-fx-background-color: #d4f1f4;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.RocketController">
+   <children>
+      <BorderPane prefHeight="800.0" prefWidth="1280.0" style="-fx-background-color: #d4f1f4;">
+         <top>
+            <HBox prefHeight="80.0" prefWidth="200.0" style="-fx-background-color: rgb(5,68,94);" BorderPane.alignment="CENTER">
+               <children>
+                  <AnchorPane prefHeight="80.0" prefWidth="398.0">
+                     <children>
+                        <ImageView fx:id="lbl_title" fitHeight="60.0" fitWidth="65.0" layoutX="14.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../images/rocket55.png" />
+                           </image>
+                        </ImageView>
+                        <Label fx:id="lbl_title_heading" layoutX="104.0" layoutY="19.0" prefHeight="43.0" prefWidth="560.0" text="Rocket Racoon Inventory" textFill="#d4f1f4">
+                           <font>
+                              <Font name="Bookman Old Style Bold" size="36.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </AnchorPane>
+                  <AnchorPane prefHeight="80.0" prefWidth="618.0">
+                     <children>
+                        <ImageView fx:id="lbl_rocket" fitHeight="60.0" fitWidth="110.0" layoutX="299.0" layoutY="10.0">
+                           <image>
+                              <Image url="@../images/racoon21.png" />
+                           </image>
+                        </ImageView>
+                        <ButtonBar layoutX="415.0" layoutY="13.0">
+                           <buttons>
+                              <Label fx:id="btn_settings" prefHeight="54.0" prefWidth="189.0" text="Settings" textFill="#d4f1f4">
+                                 <font>
+                                    <Font name="Bookman Old Style Bold" size="36.0" />
+                                 </font>
+                              </Label>
+                           </buttons>
+                        </ButtonBar>
+                     </children>
+                  </AnchorPane>
+               </children>
+            </HBox>
+         </top>
+         <center>
+            <VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
+               <children>
+                  <AnchorPane prefHeight="290.0" prefWidth="991.0" style="-fx-background-color: rgb(168,132,154);">
+                     <children>
+                        <TabPane fx:id="tab_pane_controls" layoutX="8.0" layoutY="7.0" prefHeight="250.0" prefWidth="983.0" tabClosingPolicy="UNAVAILABLE">
+                          <tabs>
+                            <Tab fx:id="pane_add_products" text="Add Product">
+                              <content>
+                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                       <children>
+                                          <GridPane hgap="10.0" layoutX="18.0" layoutY="6.0" vgap="5.0">
+                                             <columnConstraints>
+                                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
+                                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
+                                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
+                                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
+                                             </columnConstraints>
+                                             <rowConstraints>
+                                                <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+                                                <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+                                                <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+                                                <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+                                                <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+                                                <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+                                             </rowConstraints>
+                                             <children>
+                                                <Label fx:id="lbl_prod_title" prefHeight="25.0" prefWidth="150.0" text="Product Title:" textFill="#05445e">
+                                                   <font>
+                                                      <Font name="Bookman Old Style Bold" size="16.0" />
+                                                   </font>
+                                                </Label>
+                                                <TextField fx:id="txf_title" prefHeight="22.0" prefWidth="301.0" GridPane.columnIndex="1" />
+                                                <Label fx:id="lbl_price" prefHeight="25.0" prefWidth="150.0" text="Price:" textFill="#05445e" GridPane.rowIndex="2">
+                                                   <font>
+                                                      <Font name="Bookman Old Style Bold" size="16.0" />
+                                                   </font>
+                                                </Label>
+                                                <TextField fx:id="txf_price" prefHeight="25.0" prefWidth="300.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                                                <Label fx:id="lbl_cost" prefHeight="25.0" prefWidth="150.0" text="Cost:" textFill="#05445e" GridPane.rowIndex="1">
+                                                   <font>
+                                                      <Font name="Bookman Old Style Bold" size="16.0" />
+                                                   </font>
+                                                </Label>
+                                                <TextField fx:id="txf_cost" prefHeight="25.0" prefWidth="300.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                                                <Label fx:id="lbl_markup" prefHeight="25.0" prefWidth="150.0" text="Markup:" textFill="#05445e" GridPane.rowIndex="3">
+                                                   <font>
+                                                      <Font name="Bookman Old Style Bold" size="16.0" />
+                                                   </font>
+                                                </Label>
+                                                <TextField fx:id="txf_markup" prefHeight="25.0" prefWidth="300.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                                                <Label fx:id="lbl_quantity" prefHeight="25.0" prefWidth="150.0" text="Quantity:" textFill="#05445e" GridPane.rowIndex="4">
+                                                   <font>
+                                                      <Font name="Bookman Old Style Bold" size="16.0" />
+                                                   </font>
+                                                </Label>
+                                                <TextField fx:id="txf_quantity" prefHeight="25.0" prefWidth="300.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                                                <Label fx:id="lbl_units" prefHeight="25.0" prefWidth="150.0" text="Units:" textFill="#05445e" GridPane.columnIndex="2">
+                                                   <font>
+                                                      <Font name="Bookman Old Style Bold" size="16.0" />
+                                                   </font>
+                                                </Label>
+                                                <TextField fx:id="txf_units" prefHeight="25.0" prefWidth="300.0" GridPane.columnIndex="3" />
+                                                <Label fx:id="lbl_created" prefHeight="25.0" prefWidth="150.0" text="Created Date:" textFill="#05445e" GridPane.columnIndex="2" GridPane.rowIndex="1">
+                                                   <font>
+                                                      <Font name="Bookman Old Style Bold" size="16.0" />
+                                                   </font>
+                                                </Label>
+                                                <TextField fx:id="txf_created" prefHeight="25.0" prefWidth="300.0" GridPane.columnIndex="3" GridPane.rowIndex="1" />
+                                                <Label fx:id="lbl_exp" prefHeight="19.0" prefWidth="146.0" text="Exp. Date:" textFill="#05445e" GridPane.columnIndex="2" GridPane.rowIndex="2">
+                                                   <font>
+                                                      <Font name="Bookman Old Style Bold" size="16.0" />
+                                                   </font>
+                                                </Label>
+                                                <TextField fx:id="txf_exp" prefHeight="25.0" prefWidth="300.0" GridPane.columnIndex="3" GridPane.rowIndex="2" />
+                                                <Label fx:id="lbl_desc" prefHeight="25.0" prefWidth="150.0" text="Description" textFill="#05445e" GridPane.columnIndex="2" GridPane.rowIndex="5">
+                                                   <font>
+                                                      <Font name="Bookman Old Style Bold" size="16.0" />
+                                                   </font>
+                                                </Label>
+                                                <TextArea fx:id="txf_desc" prefHeight="40.0" prefWidth="300.0" GridPane.columnIndex="3" GridPane.rowIndex="5" />
+                                                <Label fx:id="lbl_sub_cat" prefHeight="19.0" prefWidth="146.0" text="Sub-category" textFill="#05445e" GridPane.columnIndex="2" GridPane.rowIndex="3">
+                                                   <font>
+                                                      <Font name="Bookman Old Style Bold" size="16.0" />
+                                                   </font>
+                                                </Label>
+                                                <TextField fx:id="txf_sub_cat" prefHeight="25.0" prefWidth="300.0" GridPane.columnIndex="3" GridPane.rowIndex="3" />
+                                                <Label fx:id="lbl_supplier" prefHeight="25.0" prefWidth="150.0" text="Supplier" textFill="#05445e" GridPane.rowIndex="5">
+                                                   <font>
+                                                      <Font name="Bookman Old Style Bold" size="16.0" />
+                                                   </font>
+                                                </Label>
+                                                <TextField fx:id="txf_supplier" prefHeight="25.0" prefWidth="300.0" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                                             </children>
+                                             <padding>
+                                                <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                             </padding>
+                                          </GridPane>
+                                       </children>
+                                    </AnchorPane>
+                              </content>
+                            </Tab>
+                              <Tab fx:id="pane_sub_cat1" text="Remove Product">
+                                 <content>
+                                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                       <children>
+                                          <Label fx:id="lbl_remove_id" layoutX="70.0" layoutY="90.0" text="The Product ID:" textFill="#05445e">
+                                             <font>
+                                                <Font name="Bookman Old Style" size="18.0" />
+                                             </font>
+                                          </Label>
+                                          <Label fx:id="lbl_remove_title" layoutX="337.0" layoutY="90.0" text="The Title:" textFill="#05445e">
+                                             <font>
+                                                <Font name="Bookman Old Style" size="18.0" />
+                                             </font>
+                                          </Label>
+                                          <Label fx:id="lbl_remove_prod" layoutX="70.0" layoutY="14.0" text="Enter Either Product ID or Title" textFill="#05445e">
+                                             <font>
+                                                <Font name="Bookman Old Style" size="24.0" />
+                                             </font>
+                                          </Label>
+                                          <TextField fx:id="txf_remove_id" layoutX="215.0" layoutY="88.0" prefHeight="25.0" prefWidth="100.0" promptText="Enter Id" />
+                                          <TextField fx:id="txf_remove_title" layoutX="492.0" layoutY="88.0" prefHeight="25.0" prefWidth="400.0" promptText="Enter Title" />
+                                       </children>
+                                    </AnchorPane>
+                                 </content>
+                              </Tab>
+                              <Tab fx:id="pane_sub_cat11" text="Stats">
+                                 <content>
+                                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                       <children>
+                                          <Button fx:id="btn_quan_increment" layoutX="375.0" layoutY="26.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="80.0" text="Add" textFill="#05445e">
+                                             <font>
+                                                <Font name="System Bold" size="14.0" />
+                                             </font>
+                                          </Button>
+                                          <Label fx:id="quan_lbl" layoutX="34.0" layoutY="30.0" text="Title ID:" textFill="#05445e">
+                                             <font>
+                                                <Font name="Bookman Old Style Bold" size="14.0" />
+                                             </font>
+                                          </Label>
+                                          <TextField fx:id="txf_quan" layoutX="112.0" layoutY="26.0" prefHeight="19.0" prefWidth="53.0" />
+                                          <Button fx:id="btn_quan_decrement" layoutX="483.0" layoutY="26.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="80.0" text="Minus" textFill="#05445e">
+                                             <font>
+                                                <Font name="System Bold" size="14.0" />
+                                             </font>
+                                          </Button>
+                                          <Label layoutX="199.0" layoutY="33.0" text="Quantity:" textFill="#05445e">
+                                             <font>
+                                                <Font name="Bookman Old Style Bold" size="14.0" />
+                                             </font>
+                                          </Label>
+                                          <Label fx:id="lbl_quan_val" layoutX="311.0" layoutY="33.0" text="x" textFill="#05445e">
+                                             <font>
+                                                <Font name="Bookman Old Style Bold" size="14.0" />
+                                             </font>
+                                          </Label>
+                                          <Label layoutX="287.0" layoutY="103.0" text="Total Markup" textFill="#05445e">
+                                             <font>
+                                                <Font name="Bookman Old Style Bold" size="14.0" />
+                                             </font>
+                                          </Label>
+                                          <Label layoutX="34.0" layoutY="157.0" text="Total Price" textFill="#05445e">
+                                             <font>
+                                                <Font name="Bookman Old Style Bold" size="14.0" />
+                                             </font>
+                                          </Label>
+                                          <Label layoutX="34.0" layoutY="103.0" text="Total Cost" textFill="#05445e">
+                                             <font>
+                                                <Font name="Bookman Old Style Bold" size="14.0" />
+                                             </font>
+                                          </Label>
+                                          <Label layoutX="294.0" layoutY="165.0" text="Profit" textFill="#05445e">
+                                             <font>
+                                                <Font name="Bookman Old Style Bold" size="14.0" />
+                                             </font>
+                                          </Label>
+                                          <TextField fx:id="txf_tcost" layoutX="125.0" layoutY="98.0" prefHeight="21.0" prefWidth="118.0" />
+                                          <TextField fx:id="txf_tprice" layoutX="125.0" layoutY="153.0" prefHeight="21.0" prefWidth="118.0" />
+                                          <TextField fx:id="txf_tmarkup" layoutX="424.0" layoutY="99.0" prefHeight="21.0" prefWidth="118.0" />
+                                          <TextField fx:id="txf_profit" layoutX="424.0" layoutY="161.0" prefHeight="21.0" prefWidth="118.0" />
+                                       </children></AnchorPane>
+                                 </content>
+                              </Tab>
+                              <Tab fx:id="pane_sub_cat" text="Sub-category">
+                                 <content>
+                                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                       <children>
+                                          <ListView fx:id="list_categories" layoutX="23.0" layoutY="12.0" prefHeight="197.0" prefWidth="180.0" style="-fx-background-color: rgb(197,173,187);" />
+                                       </children>
+                                    </AnchorPane>
+                                 </content>
+                              </Tab>
+                          </tabs>
+                        </TabPane>
+                     </children>
+                  </AnchorPane>
+                  <AnchorPane prefHeight="458.0" prefWidth="991.0">
+                     <children>
+                        <TableView fx:id="tbl_products" layoutX="14.0" layoutY="11.0" prefHeight="436.0" prefWidth="965.0">
+                          <columns>
+                            <TableColumn fx:id="col_id" minWidth="-Infinity" prefWidth="100.0" text="Product ID" />
+                            <TableColumn fx:id="col_title" minWidth="-Infinity" prefWidth="172.0" text="Product Title" />
+                              <TableColumn fx:id="col_cost" minWidth="-Infinity" text="Cost" />
+                              <TableColumn fx:id="col_price" minWidth="-Infinity" text="Price" />
+                              <TableColumn fx:id="col_markup" minWidth="-Infinity" text="Markup" />
+                              <TableColumn fx:id="col_quantity" minWidth="-Infinity" text="Quantity" />
+                              <TableColumn fx:id="col_units" minWidth="-Infinity" text="Units" />
+                              <TableColumn fx:id="col_created" minWidth="0.0" text="Created" />
+                              <TableColumn fx:id="col_expire" minWidth="0.0" text="Exiration" />
+                          </columns>
+                        </TableView>
+                     </children>
+                  </AnchorPane>
+               </children>
+            </VBox>
+         </center>
+         <left>
+            <VBox prefHeight="721.0" prefWidth="290.0" spacing="10.0" style="-fx-background-color: rgb(132,168,154);" BorderPane.alignment="CENTER">
+               <children>
+                  <GridPane vgap="10.0">
+                     <columnConstraints>
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
+                     </columnConstraints>
+                     <rowConstraints>
+                        <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+                     </rowConstraints>
+                     <children>
+                        <Button fx:id="btn_all_products" mnemonicParsing="false" onAction="#on_clicked_btn_all_products" prefHeight="28.0" prefWidth="293.0" style="-fx-background-color: rgb(87,123,101);" text="All Products" textFill="#05445e">
+                           <font>
+                              <Font name="Bookman Old Style Bold" size="16.0" />
+                           </font>
+                        </Button>
+                        <ComboBox fx:id="btn_combo_cat" editable="true" prefHeight="29.0" prefWidth="293.0" promptText="Categorties" style="-fx-background-color: rgb(87,123,101);" visibleRowCount="20" GridPane.rowIndex="1" />
+                        <Button fx:id="btn_category" mnemonicParsing="false" onAction="#on_clicked_get_categories" prefHeight="28.0" prefWidth="293.0" style="-fx-background-color: rgb(87,123,101);" text="Category" textFill="#05445e" GridPane.rowIndex="2">
+                           <font>
+                              <Font name="Bookman Old Style Bold" size="16.0" />
+                           </font>
+                        </Button>
+                        <Button fx:id="btn_add_product" mnemonicParsing="false" onAction="#insert_products" prefHeight="28.0" prefWidth="293.0" style="-fx-background-color: rgb(87,123,101);" text="Add Product" textFill="#05445e" GridPane.rowIndex="3">
+                           <font>
+                              <Font name="Bookman Old Style Bold" size="16.0" />
+                           </font>
+                        </Button>
+                        <Button fx:id="btn_remove_product" mnemonicParsing="false" onAction="#delete_product" prefHeight="28.0" prefWidth="293.0" style="-fx-background-color: rgb(87,123,101);" text="Remove Product" textFill="#05445e" GridPane.rowIndex="4">
+                           <font>
+                              <Font name="Bookman Old Style Bold" size="16.0" />
+                           </font>
+                        </Button>
+                        <Button mnemonicParsing="false" prefHeight="28.0" prefWidth="293.0" style="-fx-background-color: rgb(87,123,101);" text="Add Sub-category" textFill="#05445e" GridPane.rowIndex="5">
+                           <font>
+                              <Font name="Bookman Old Style Bold" size="16.0" />
+                           </font>
+                        </Button>
+                        <Button mnemonicParsing="false" prefHeight="28.0" prefWidth="293.0" style="-fx-background-color: rgb(87,123,101);" text="Remove Sub-category" textFill="#05445e" GridPane.rowIndex="6">
+                           <font>
+                              <Font name="Bookman Old Style Bold" size="16.0" />
+                           </font>
+                        </Button>
+                        <Button mnemonicParsing="false" prefHeight="28.0" prefWidth="293.0" style="-fx-background-color: rgb(87,123,101);" text="Stats" textFill="#05445e" GridPane.rowIndex="7">
+                           <font>
+                              <Font name="Bookman Old Style Bold" size="16.0" />
+                           </font>
+                        </Button>
+                        <Button fx:id="btn_close" mnemonicParsing="false" onAction="#on_clicked_btn_close" prefHeight="28.0" prefWidth="293.0" style="-fx-background-color: rgb(87,123,101);" text="Sign-out" textFill="#05445e" GridPane.rowIndex="8">
+                           <font>
+                              <Font name="Bookman Old Style Bold" size="16.0" />
+                           </font>
+                        </Button>
+                     </children>
+                  </GridPane>
+                  <AnchorPane prefHeight="367.0" prefWidth="256.0" />
+               </children>
+            </VBox>
+         </left>
+      </BorderPane>
+   </children>
+</AnchorPane>
