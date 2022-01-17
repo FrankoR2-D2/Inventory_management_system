@@ -10,6 +10,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 
+import javax.swing.*;
 import java.net.URL;
 import java.sql.*;
 import java.util.ArrayList;
@@ -129,6 +130,35 @@ public class RocketController implements Initializable {
     @FXML
     private ComboBox<String> btn_combo_cat;
 
+
+    @FXML
+    private TextField txf_tcost;
+    @FXML
+    private TextField txf_tmarkup;
+    @FXML
+    private TextField txf_tprice;
+    @FXML
+    private TextField txf_profit;
+    @FXML
+    private TextField txf_quan;
+    @FXML
+    private Label lbl_quan_val;
+    @FXML
+    private Button btn_quan_increment;
+    @FXML
+    private Button btn_quan_decrement;
+
+    @FXML
+    public void on_clicked_quan_add(ActionEvent event){
+
+    }
+    @FXML
+    public void on_clicked_quan_minus(ActionEvent event){
+
+    }
+    @FXML
+    private Button btn_select;
+
     ArrayList<String> sub_id = new ArrayList<>();
     ArrayList<String> sub_title = new ArrayList<>();
     ArrayList<String> fk_cat_id = new ArrayList<>();
@@ -137,7 +167,17 @@ public class RocketController implements Initializable {
     ArrayList<String> cat_desc = new ArrayList<>();
 
 
+    @Override
+    public void initialize(URL url,ResourceBundle resourceBundle ) {
 
+        on_clicked_get_categories();
+        categories();
+        ObservableList<String> cat_t = FXCollections.observableArrayList(cat_title);
+        btn_combo_cat.setItems(cat_t);
+        calculate_markup();
+        get_totals();
+        showProducts();
+    }
 
     public void on_clicked_btn_close(ActionEvent event) {
         Stage stage = (Stage) btn_close.getScene().getWindow();
@@ -154,20 +194,31 @@ public class RocketController implements Initializable {
         showCategories();
     }
 
+    public void on_clicked_get_categories(){
+        try {
+            DatabaseConnection db_obj = new DatabaseConnection();
+            Connection db_con = db_obj.getConnection();
+            Statement statement = db_con.createStatement();
+            ResultSet rs = statement.executeQuery("SELECT * FROM public.sub_category;");
 
-    @Override
-    public void initialize(URL url,ResourceBundle resourceBundle ) {
 
-            on_clicked_get_categories();
-            categories();
-             ObservableList<String> cat_t = FXCollections.observableArrayList(cat_title);
-             btn_combo_cat.setItems(cat_t);
-                calculate_markup();
-                get_totals();
-             showProducts();
-//        set_quant();
 
+            while ((rs.next())) {
+                sub_id.add(String.valueOf(rs.getArray("sub_id")));
+                sub_title.add(String.valueOf(rs.getArray("sub_title")));
+                fk_cat_id.add(String.valueOf(rs.getArray("fk_cat_id")));
+            }
+
+
+        } catch (SQLException e) {
+            System.out.println("Could not get Products");
+            e.printStackTrace();
+        }
+
+
+        showCategories();
     }
+
 
     public ObservableList<Products> getProductsList() {
         ObservableList<Products> product_list = FXCollections.observableArrayList();
@@ -196,30 +247,7 @@ public class RocketController implements Initializable {
     }
 
 
-    public void on_clicked_get_categories(){
-           try {
-               DatabaseConnection db_obj = new DatabaseConnection();
-               Connection db_con = db_obj.getConnection();
-               Statement statement = db_con.createStatement();
-               ResultSet rs = statement.executeQuery("SELECT * FROM public.sub_category;");
 
-
-
-               while ((rs.next())) {
-                  sub_id.add(String.valueOf(rs.getArray("sub_id")));
-                  sub_title.add(String.valueOf(rs.getArray("sub_title")));
-                  fk_cat_id.add(String.valueOf(rs.getArray("fk_cat_id")));
-               }
-
-
-           } catch (SQLException e) {
-               System.out.println("Could not get Products");
-               e.printStackTrace();
-           }
-
-
-                showCategories();
-       }
 
     public void categories(){
         try {
@@ -292,7 +320,7 @@ public class RocketController implements Initializable {
 
     }
 
-public void delete_product(ActionEvent event){
+    public void delete_product(ActionEvent event){
 
     String id = txf_remove_id.getText();
     String title = txf_remove_title.getText();
@@ -343,7 +371,7 @@ public void delete_product(ActionEvent event){
 
 
 
-public static void calculate_markup(){
+    public static void calculate_markup(){
     HashMap<Integer, Double> markup_map = new HashMap<Integer, Double>();
 
     String query = "SELECT  product_id, cost, price FROM public.inventory;";
@@ -382,31 +410,6 @@ public static void calculate_markup(){
     }
 }
 
-    @FXML
-    private TextField txf_tcost;
-    @FXML
-    private TextField txf_tmarkup;
-    @FXML
-    private TextField txf_tprice;
-    @FXML
-    private TextField txf_profit;
-    @FXML
-    private TextField txf_quan;
-    @FXML
-    private Label lbl_quan_val;
-    @FXML
-    private Button btn_quan_increment;
-    @FXML
-    private Button btn_quan_decrement;
-
-    @FXML
-    public void on_clicked_quan_add(ActionEvent event){
-
-    }
-    @FXML
-    public void on_clicked_quan_minus(ActionEvent event){
-
-    }
 
 
     public void get_totals(){
@@ -458,25 +461,38 @@ public static void calculate_markup(){
         txf_profit.setText(String.valueOf(tot_profit));
     }
 
-//    public void set_quant(){
-//        ResultSet q = null;
-//        int id = Integer.valueOf(txf_quan.getText());
-//        try{
-//            DatabaseConnection db_obj = new DatabaseConnection();
-//            Connection db_con = db_obj.getConnection();
-//            String str = "SELECT quantity FROM public.inventory where product_id = " + id+";";
-//                Statement statement = db_con.createStatement();
-//                 q = statement.executeQuery(str);
-//
-//
-//            db_con.close();
-//        }catch (SQLException e)
-//        {
-//            e.printStackTrace();
-//        }
-//
-//        lbl_quan_val.setText(String.valueOf(q));
-//    }
+    public  void btn_select(ActionEvent event)
+    {
+        set_quant_id();
+    }
+
+    public void set_quant_id(){
+
+        String id = txf_quan.getText();
+        if (id.isBlank())
+        {
+            JOptionPane.showMessageDialog(null, "Enter the Title id: ");
+        }
+        System.out.println("Quantity id = " + id);
+        try{
+            DatabaseConnection db_obj = new DatabaseConnection();
+            Connection db_con = db_obj.getConnection();
+            String str = "SELECT quantity FROM public.inventory where product_id = " + id+";";
+            Statement statement = db_con.createStatement();
+            ResultSet  rs = statement.executeQuery(str);
+            while (rs.next()){
+                System.out.println(rs.getString("quantity"));
+                lbl_quan_val.setText(rs.getString("quantity"));
+            }
+
+            db_con.close();
+        }catch (SQLException e)
+        {
+            e.printStackTrace();
+        }
+
+
+    }
 
 
 
