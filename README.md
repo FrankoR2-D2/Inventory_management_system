@@ -5,7 +5,7 @@ Rocket is theme of the store and is used as a brand name.
 
 The Inventory Managment System it is still a working progress.
 
-The database schema has been created scalably - based on a franchise store model. More stores can be add and there can be branch-franchises. 
+The database schema has been created scalable - based on a franchise store model. More stores can be add and there can be branch-franchises. 
 
 Initial scope was to:
         
