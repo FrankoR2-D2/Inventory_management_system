@@ -149,14 +149,6 @@ public class RocketController implements Initializable {
     private Button btn_quan_decrement;
 
     @FXML
-    public void on_clicked_quan_add(ActionEvent event){
-
-    }
-    @FXML
-    public void on_clicked_quan_minus(ActionEvent event){
-
-    }
-    @FXML
     private Button btn_select;
 
     ArrayList<String> sub_id = new ArrayList<>();
@@ -174,6 +166,10 @@ public class RocketController implements Initializable {
         categories();
         ObservableList<String> cat_t = FXCollections.observableArrayList(cat_title);
         btn_combo_cat.setItems(cat_t);
+        tot_stats();
+    }
+
+    public void tot_stats(){
         calculate_markup();
         get_totals();
         showProducts();
@@ -318,6 +314,7 @@ public class RocketController implements Initializable {
         }
         showProducts();
 
+
     }
 
     public void delete_product(ActionEvent event){
@@ -411,7 +408,6 @@ public class RocketController implements Initializable {
 }
 
 
-
     public void get_totals(){
         ArrayList<Double> cost = new ArrayList<>();
         ArrayList<Double> price = new ArrayList<>();
@@ -439,7 +435,6 @@ public class RocketController implements Initializable {
         }
     }
 
-
     private void calc_totals(ArrayList<Double> cost, ArrayList<Double> price, int size){
         int k = 0;
         double tot_cost = 0;
@@ -466,9 +461,29 @@ public class RocketController implements Initializable {
         set_quant_id();
     }
 
-    public void set_quant_id(){
+    public void btn_quan_increment(ActionEvent event)
+    {
+        increment_quantity();
+    }
 
-        String id = txf_quan.getText();
+    public void btn_quan_decrement(ActionEvent event){
+        decrement_quantity();
+    }
+
+    private String quantity_id =  "";
+    private int quantity = 0;
+
+    public String get_quantity_id(){
+        return txf_quan.getText();
+    }
+
+    public int get_quantity(){
+        return this.quantity;
+    }
+
+    public void set_quant_id(){
+        int q;
+        String id = get_quantity_id();
         if (id.isBlank())
         {
             JOptionPane.showMessageDialog(null, "Enter the Title id: ");
@@ -481,8 +496,11 @@ public class RocketController implements Initializable {
             Statement statement = db_con.createStatement();
             ResultSet  rs = statement.executeQuery(str);
             while (rs.next()){
-                System.out.println(rs.getString("quantity"));
-                lbl_quan_val.setText(rs.getString("quantity"));
+                String s = rs.getString("quantity");
+                System.out.println(s);
+                lbl_quan_val.setText(s);
+                q = Integer.parseInt(s);
+                this.quantity = q;
             }
 
             db_con.close();
@@ -495,6 +513,44 @@ public class RocketController implements Initializable {
     }
 
 
+    public void increment_quantity(){
+        try {
+            DatabaseConnection db_obj = new DatabaseConnection();
+            Connection db_con = db_obj.getConnection();
+            String str = "UPDATE public.inventory " +
+                    " SET  quantity= " + (get_quantity()+1) +
+                    " WHERE product_id = " +get_quantity_id()+ ";";
+            PreparedStatement preparedStatement = db_con.prepareStatement(str);
+            preparedStatement.executeUpdate();
+            set_quant_id();
+            showProducts();
+            tot_stats();
+
+            db_con.close();
+
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+    }
+
+    public void decrement_quantity(){
+
+        try {
+            DatabaseConnection db_obj = new DatabaseConnection();
+            Connection db_con = db_obj.getConnection();
+            String str = "UPDATE public.inventory " +
+                    " SET  quantity= " + (get_quantity()-1) +
+                    " WHERE product_id = " +get_quantity_id()+ ";";
+            PreparedStatement preparedStatement = db_con.prepareStatement(str);
+            preparedStatement.executeUpdate();
+            set_quant_id();
+            showProducts();
+            tot_stats();
+            db_con.close();
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+    }
 
 }
 
